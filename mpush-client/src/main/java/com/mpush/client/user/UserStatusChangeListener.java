@@ -47,5 +47,6 @@ public class UserStatusChangeListener implements MQMessageReceiver {
     @Override
     public void receive(String channel, Object message) {
 
+        System.out.println("UserStatusChangeListener " +channel + " " + message);
     }
 }

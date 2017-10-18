@@ -28,6 +28,7 @@ import com.mpush.common.condition.AwaysPassCondition;
 import com.mpush.common.message.PushMessage;
 import com.mpush.common.qps.FlowControl;
 import com.mpush.common.qps.OverFlowException;
+import com.mpush.common.router.RemoteRouter;
 import com.mpush.core.MPushServer;
 import com.mpush.core.router.LocalRouter;
 import com.mpush.tools.common.TimeLine;
@@ -112,6 +113,8 @@ public final class BroadcastPushTask implements PushTask {
                             Logs.PUSH.warn("[Broadcast] find router in local but conn disconnect, message={}, conn={}", message, connection);
                             //删除已经失效的本地路由
                             mPushServer.getRouterCenter().getLocalRouterManager().unRegister(userId, clientType);
+                            //todo "再查下远程路由，看用户是否登陆到其他机器" 这句实现了吗???
+
                         }
                     }
 

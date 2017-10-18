@@ -52,6 +52,7 @@ public final class ServerLauncher {
             serverEventListener = ServerEventListenerFactory.create();
         }
 
+        //todo
         serverEventListener.init(mPushServer);
 
         chain.boot()
@@ -59,13 +60,13 @@ public final class ServerLauncher {
                 .setNext(new ServiceRegistryBoot())//2.启动服务注册与发现模块
                 .setNext(new ServiceDiscoveryBoot())//2.启动服务注册与发现模块
                 .setNext(new ServerBoot(mPushServer.getConnectionServer(), mPushServer.getConnServerNode()))//3.启动接入服务
-                .setNext(() -> new ServerBoot(mPushServer.getWebsocketServer(), mPushServer.getWebsocketServerNode()), wsEnabled())//4.启动websocket接入服务
-                .setNext(() -> new ServerBoot(mPushServer.getUdpGatewayServer(), mPushServer.getGatewayServerNode()), udpGateway())//5.启动udp网关服务
-                .setNext(() -> new ServerBoot(mPushServer.getGatewayServer(), mPushServer.getGatewayServerNode()), tcpGateway())//6.启动tcp网关服务
+                .setNext(new ServerBoot(mPushServer.getWebsocketServer(), mPushServer.getWebsocketServerNode()), wsEnabled())//4.启动websocket接入服务
+                .setNext(new ServerBoot(mPushServer.getUdpGatewayServer(), mPushServer.getGatewayServerNode()), udpGateway())//5.启动udp网关服务
+                .setNext(new ServerBoot(mPushServer.getGatewayServer(), mPushServer.getGatewayServerNode()), tcpGateway())//6.启动tcp网关服务
                 .setNext(new ServerBoot(mPushServer.getAdminServer(), null))//7.启动控制台服务
                 .setNext(new RouterCenterBoot(mPushServer))//8.启动路由中心组件
                 .setNext(new PushCenterBoot(mPushServer))//9.启动推送中心组件
-                .setNext(() -> new HttpProxyBoot(mPushServer), CC.mp.http.proxy_enabled)//10.启动http代理服务，dns解析服务
+                .setNext(new HttpProxyBoot(mPushServer), CC.mp.http.proxy_enabled)//10.启动http代理服务，dns解析服务
                 .setNext(new MonitorBoot(mPushServer))//11.启动监控服务
                 .end();
     }

@@ -19,9 +19,14 @@
 
 package com.mpush.core.server;
 
+import com.google.common.eventbus.AllowConcurrentEvents;
+import com.google.common.eventbus.Subscribe;
 import com.mpush.api.common.ServerEventListener;
+import com.mpush.api.event.UserOfflineEvent;
+import com.mpush.api.event.UserOnlineEvent;
 import com.mpush.api.spi.Spi;
 import com.mpush.api.spi.core.ServerEventListenerFactory;
+import com.mpush.tools.event.EventBus;
 
 /**
  * Created by ohun on 16/10/19.
@@ -33,6 +38,24 @@ public final class DefaultServerEventListener implements ServerEventListener, Se
 
     @Override
     public ServerEventListener get() {
+        //一定不能忘了这句 及on方法上的一堆注解
+        EventBus.register(this);
         return this;
+    }
+
+    @Override
+    @Subscribe
+    @AllowConcurrentEvents
+    public void on(UserOfflineEvent event) {
+        System.out.println("用户掉线--->" + event.getUserId());
+        ServerEventListener.super.on(event);
+    }
+
+    @Override
+    @Subscribe
+    @AllowConcurrentEvents
+    public void on(UserOnlineEvent event) {
+        System.out.println("用户在线--->" + event.getUserId());
+        ServerEventListener.super.on(event);
     }
 }

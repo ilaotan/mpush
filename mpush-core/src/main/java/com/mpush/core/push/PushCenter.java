@@ -47,6 +47,7 @@ import static com.mpush.tools.config.CC.mp.push.flow_control.broadcast.max;
  * @author ohun@live.cn (夜色)
  */
 public final class PushCenter extends BaseService implements MessagePusher {
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final GlobalFlowControl globalFlowControl = new GlobalFlowControl(

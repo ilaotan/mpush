@@ -30,6 +30,7 @@ public class PubSubTest {
     ListenerDispatcher listenerDispatcher = new ListenerDispatcher();
     @Before
     public void init() {
+        RedisManager.I.init();
     }
 
     @Test

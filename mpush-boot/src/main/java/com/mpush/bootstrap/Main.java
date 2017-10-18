@@ -25,6 +25,8 @@ public class Main {
 
     /**
      * 源码启动请不要直接运行此方法，否则不能正确加载配置文件
+     * (因为配置文件的加载问题 CC.java会读取application.conf,但boot里没有这个文件,导致部分配置参数load不进来)
+     * 可以把test模块里的application.conf挪到此处,但是不确定有没有其他影响,慎用,理解why不能这样启动就好了
      *
      * @param args 启动参数
      */

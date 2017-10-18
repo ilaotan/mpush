@@ -14,7 +14,7 @@ import java.net.URLDecoder;
 
 @ChannelHandler.Sharable
 /*package*/ class HttpClientHandler extends ChannelInboundHandlerAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NettyHttpClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientHandler.class);
 
     private final NettyHttpClient client;
 

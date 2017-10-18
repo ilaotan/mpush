@@ -69,6 +69,9 @@ public final class ConnectionServer extends NettyTCPServer {
         this.mPushServer = mPushServer;
         this.connectionManager = new ServerConnectionManager(true);
         this.messageDispatcher = new MessageDispatcher();
+        //注意这里把messageDispatcher传入了
+        //下面的初始化会向messageDispatcher加入一堆的Handler
+        //此channelHandler会在 NettyTCPServer.java的initPipeline中加入到netty解析队列中
         this.channelHandler = new ServerChannelHandler(true, connectionManager, messageDispatcher);
     }
 

@@ -290,3 +290,7 @@ mp {
 }
 ```
 11. 未完待续...
+
+打包
+clean package -Dmaven.test.skip=true -Ppub,zip
+在mpush-boot模块里找到打好的包

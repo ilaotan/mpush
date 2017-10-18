@@ -40,8 +40,11 @@ public interface CC {
     Config cfg = load();
 
     static Config load() {
-        Config config = ConfigFactory.load();//扫描加载所有可用的配置文件
+        //可识别Java system properties, 如java -Dmyapp.foo.bar=10
+        Config config = ConfigFactory.load();//扫描加载所有可用的配置文件 读取 application.json application.properties application.conf这三个文件
+
         String custom_conf = "mp.conf";//加载自定义配置, 值来自jvm启动参数指定-Dmp.conf
+        //如果刚才load进的值有mp.conf这个key 就拿出这个key对应的路径  load进来
         if (config.hasPath(custom_conf)) {
             File file = new File(config.getString(custom_conf));
             if (file.exists()) {
