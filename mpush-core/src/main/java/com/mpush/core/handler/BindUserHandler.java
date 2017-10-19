@@ -174,6 +174,7 @@ public final class BindUserHandler extends BaseMessageHandler<BindUserMessage> {
 
     @Spi(order = 1)
     public static class DefaultBindValidatorFactory implements BindValidatorFactory {
+        //todo 如果需要覆盖用户绑定时的验证机制
         private final BindValidator validator = (userId, data) -> true;
 
         @Override
