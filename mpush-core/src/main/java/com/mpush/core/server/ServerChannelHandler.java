@@ -91,6 +91,7 @@ public final class ServerChannelHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Logs.CONN.info("client connected conn={}", ctx.channel());
         Connection connection = new NettyConnection();
+        //频道初始化时 就初始化了一个RSA解密
         connection.init(ctx.channel(), security);
         connectionManager.add(connection);
     }
