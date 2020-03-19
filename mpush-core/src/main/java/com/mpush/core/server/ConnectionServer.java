@@ -135,7 +135,7 @@ public final class ConnectionServer extends NettyTCPServer {
     protected void initPipeline(ChannelPipeline pipeline) {
         super.initPipeline(pipeline);
         if (trafficShapingHandler != null) {
-            pipeline.addLast(trafficShapingHandler);
+            pipeline.addFirst(trafficShapingHandler);
         }
     }
 
